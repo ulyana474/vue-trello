@@ -4,10 +4,10 @@
             <v-form fast-fail @submit.prevent="login">
                 <v-text-field v-model="username" label="User Name" :rules="usernameRules"></v-text-field>
 
-                <v-text-field v-model="password" label="password"></v-text-field>
+                <v-text-field v-model="password" label="password" :rules="passwordRules"></v-text-field>
                 <a href="#" class="text-body-2 font-weight-regular">Forgot Password?</a>
 
-                <v-btn type="submit" color="primary" block class="mt-2">Sign in</v-btn>
+                <v-btn type="submit" color="yellow mr-6" block class="mt-2">Sign in</v-btn>
 
             </v-form>
             <div class="mt-2">
@@ -19,7 +19,8 @@
 
 <script>
 export default {
-  data: () => ({
+  data() {
+    return {
       username: '',
       usernameRules: [
         value => {
@@ -35,6 +36,7 @@ export default {
           return 'Password must contain at least 8 characters of letters, numbers and special symbols'
         }
       ]
-    })
+    } 
+  },
 }
 </script>

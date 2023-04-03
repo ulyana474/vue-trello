@@ -46,6 +46,8 @@
             class="mx-auto"
             color="grey-lighten-3"
             max-width="400"
+            v-model="task"
+            @keyup.enter="saveTask($event.target.value)"
             >
             <v-card-text>
             <v-text-field
@@ -64,3 +66,19 @@
       </v-row>
     </v-container>
 </template>
+
+
+<script>
+export default {
+  data() {
+    return {
+      task: ''
+    }
+  },
+  methods: {
+    saveTask: (task) => {
+      alert(task)
+    }
+  }
+}
+</script>
