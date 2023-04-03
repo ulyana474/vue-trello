@@ -47,7 +47,7 @@
             color="grey-lighten-3"
             max-width="400"
             v-model="task"
-            @keyup.enter="saveTask($event.target.value)"
+            @keyup.enter="store.increment(1)"
             >
             <v-card-text>
             <v-text-field
@@ -69,16 +69,19 @@
 
 
 <script>
+import { useTaskStore } from "../stores/counter"
+
 export default {
   data() {
     return {
-      task: ''
+      task: '',
+      store: useTaskStore()
     }
   },
-  methods: {
-    saveTask: (task) => {
-      alert(task)
-    }
-  }
+  // methods: {
+  //   saveTask: (task) => {
+  //     alert(task)
+  //   }
+  // }
 }
 </script>
