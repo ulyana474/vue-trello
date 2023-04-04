@@ -1,31 +1,23 @@
 import { defineStore } from 'pinia'
 
-export const useTaskStore = defineStore("counter", {
-  state: () => {
-    if (localStorage.getItem("counter"))
-      return JSON.parse(localStorage.getItem("counter"));
+export const useTaskStore = defineStore("task", {
+  state: () : any => {
+    if (localStorage.getItem("task_list"))
+      return localStorage.getItem("task_list");
     return {
-      count: 0,
-    };
-  },
-  actions: {
-    increment(value = 1) {
-      this.count += value;
-      alert("incremented")
-    },
-    decrement(value = 1) {
-      this.count -= value;
-    },
-    reset() {
-      this.count = 0;
+      task_list: []
     }
   },
-  getters: {
-    doubleCount: (state) => {
-      return state.count * 2;
+  actions: {
+    store_task(task_list: []) {
+      localStorage.setItem("task_list", JSON.stringify(task_list));
     },
-    squareCount: (state) => {
-      return state.count ** 2;
-    },
+    retrieve_task(): any {
+      if (localStorage.getItem("task_list") != null) {
+        const task_list = JSON.parse(localStorage.getItem("task_list"));
+        return task_list
+      }
+      return []
+    }
   },
 });
