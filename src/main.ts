@@ -17,10 +17,3 @@ createApp(App)
   .use(pinia)
   .mount('#app')
 
-  watch(
-    pinia.state,
-    (state) => {
-      localStorage.setItem("counter", JSON.stringify(state.counter));
-    },
-    { deep: true }
-    );

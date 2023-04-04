@@ -5,7 +5,7 @@
                 md="3" 
                 align-self="center" 
                 justify="center">
-                <v-text class="text-h4">Welcome</v-text>
+                <v-text class="text-h4">Aye</v-text>
             </v-col>
             <v-col 
                 align="right" 
@@ -47,7 +47,7 @@
             color="grey-lighten-3"
             max-width="400"
             v-model="task"
-            @keyup.enter="store.increment(1)"
+            @keyup.enter="addTask($event.target.value);"
             >
             <v-card-text>
             <v-text-field
@@ -64,6 +64,7 @@
           </v-sheet>
         </v-col>
       </v-row>
+      <div style="color: aquamarine;">{{ task_list }}</div>
     </v-container>
 </template>
 
@@ -72,16 +73,27 @@
 import { useTaskStore } from "../stores/counter"
 
 export default {
+
+  setup() {
+    // initialize the store
+    const store = useTaskStore()
+    return {store}
+  },
+
   data() {
     return {
-      task: '',
-      store: useTaskStore()
+      task_list: this.store.retrieve_task()
     }
   },
-  // methods: {
-  //   saveTask: (task) => {
-  //     alert(task)
-  //   }
-  // }
+  methods: {
+    addTask(task) {
+      this.task_list.push({
+        id: this.task_list.length + 1,
+        task: task,
+        completed: false
+      })
+      this.store.store_task(this.task_list)
+    }
+  }
 }
 </script>
